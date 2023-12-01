@@ -1,14 +1,14 @@
 class Api::V1::FarmsController < ::Api::BaseController
-    before_action :authenticate_request, only: [:create, :update, :destory]
+    before_action :authenticate_request, only: [:create, :update, :destroy]
 
     def index 
-        @farms = Farm.all
-        render json: @farms, include: {users: {}}
+        farms = Farm.all
+        render json: farms, include: {users: {}}
     end
 
     def show
-        @farm = Farm.find(params[:id])
-        render json: @farm, include: {users: {}}
+        farm = Farm.find(params[:id])
+        render json: farm, include: {users: {}}
     end
 
     def create
@@ -23,12 +23,12 @@ class Api::V1::FarmsController < ::Api::BaseController
     end
 
     def update
-        @farm = Farm.find(params[:id])
+        farm = Farm.find(params[:id])
         if @current_user.role === 'super_admin' || @current_user.is_farm_admin?(farm)
-            if @farm.update(farm_params)
-                render json: @farm
+            if farm.update(farm_params)
+                render json: farm
             else
-                render json: {error_msg: @farm.errors}, status: :unprocessable_entity
+                render json: {error_msg: farm.errors}, status: :unprocessable_entity
             end
         else
             render json: {error_msg: 'Unauthorised to update this farm details'}, status: :unprocessable_entity
@@ -36,10 +36,10 @@ class Api::V1::FarmsController < ::Api::BaseController
     end
 
     def destroy
-        @farm = Farm.find(params[:id])
+        farm = Farm.find(params[:id])
 
         if @current_user.role === 'super-admin' || @current_user.is_farm_admin?(farm)
-            if @farm.destroy
+            if farm.destroy
                 render json: {success_msg: "farm successfully deleted"}
             else
                 render json: {error_msg: "Unable to deleted the farm"}

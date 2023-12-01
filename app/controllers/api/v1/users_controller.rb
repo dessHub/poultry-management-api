@@ -1,14 +1,14 @@
 class Api::V1::UsersController < ::Api::BaseController
-    before_action :authenticate_request, only: [:show, :update, :destory]
+    before_action :authenticate_request, only: [:show, :update, :destroy]
 
     def index 
-        @users = User.all
-        render json: @users, include: {farms: {}}
+        users = User.all
+        render json: users, include: {farms: {}}
     end
 
     def show
-        @user = User.find(params[:id])
-        render json: @user, include: {farms: {}}
+        user = User.find(params[:id])
+        render json: user, include: {farms: {}}
     end
 
     def create
@@ -22,12 +22,12 @@ class Api::V1::UsersController < ::Api::BaseController
     end
 
     def update
-        @user = User.find(params[:id])
+        user = User.find(params[:id])
         if @current_user.role === 'super-admin' || @current_user.id === params[:id].to_i
-            if @user.update(user_params)
-                render json: @user
+            if user.update(user_params)
+                render json: user
             else
-                render json: {error_msg: @user.errors}, status: :unprocessable_entity
+                render json: {error_msg: user.errors}, status: :unprocessable_entity
             end
         else
             render json: {error_msg: 'Unauthorised to update this User details'}, status: :unprocessable_entity
@@ -35,10 +35,10 @@ class Api::V1::UsersController < ::Api::BaseController
     end
 
     def destroy
-        @user = User.find(params[:id])
+        user = User.find(params[:id])
 
         if @current_user.role === 'super-admin' || @current_user.id === params[:id].to_i
-            if @user.destroy
+            if user.destroy
                 render json: {success_msg: "User successfully deleted"}
             else
                 render json: {error_msg: "Unable to deleted the User"}
