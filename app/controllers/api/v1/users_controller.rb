@@ -55,7 +55,9 @@ class Api::V1::UsersController < ::Api::BaseController
     end
 
     def encode_token(user_id)
-      JWT.encode({ user_id: user_id }, Rails.application.secrets.secret_key_base)
+        exp = 24.hours.from_now.to_i # Token expires in 24 hours
+        payload = { user_id: user_id, exp: exp }
+        JWT.encode(payload, Rails.application.secrets.secret_key_base)
     end
     
 end
