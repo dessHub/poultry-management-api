@@ -5,7 +5,6 @@ class CreateFarms < ActiveRecord::Migration[7.0]
       t.string :description
       t.string :country
       t.string :location
-      t.references :user, foreign_key: true
 
       t.timestamps
     end

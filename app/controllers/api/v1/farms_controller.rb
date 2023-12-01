@@ -3,18 +3,18 @@ class Api::V1::FarmsController < ::Api::BaseController
 
     def index 
         @farms = Farm.all
-        render json: @farms
+        render json: @farms, include: {users: {}}
     end
 
     def show
         @farm = Farm.find(params[:id])
-        render json: @farm
+        render json: @farm, include: {users: {}}
     end
 
     def create
         farm = Farm.new(farm_params)
-        farm.user_id = @current_user.id
-        
+        farm.current_user = @current_user
+
         if farm.save
           render json: farm
         else
@@ -24,7 +24,7 @@ class Api::V1::FarmsController < ::Api::BaseController
 
     def update
         @farm = Farm.find(params[:id])
-        if @current_user.role === 'super-admin' || @current_user.id === params[:id].to_i
+        if @current_user.role === 'super_admin' || @current_user.is_farm_admin?(farm)
             if @farm.update(farm_params)
                 render json: @farm
             else
@@ -38,7 +38,7 @@ class Api::V1::FarmsController < ::Api::BaseController
     def destroy
         @farm = Farm.find(params[:id])
 
-        if @current_user.role === 'super-admin' || @current_user.id === params[:id].to_i
+        if @current_user.role === 'super-admin' || @current_user.is_farm_admin?(farm)
             if @farm.destroy
                 render json: {success_msg: "farm successfully deleted"}
             else

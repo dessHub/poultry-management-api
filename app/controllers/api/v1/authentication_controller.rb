@@ -3,7 +3,7 @@ class Api::V1::AuthenticationController < ::Api::BaseController
     @user = User.find_by(email: params[:email])
     if @user&.authenticate(params[:password])
       @token = generate_token(@user.id)
-      render json: { token: @token }
+      render json: { token: @token, user: @user }
     else
       render json: { error: 'Invalid credentials'}, status: :unauthorized
     end

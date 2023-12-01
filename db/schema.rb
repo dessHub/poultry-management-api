@@ -10,9 +10,28 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_11_23_084004) do
+ActiveRecord::Schema[7.0].define(version: 2023_11_29_124619) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "farm_users", force: :cascade do |t|
+    t.bigint "farm_id"
+    t.bigint "user_id"
+    t.string "role", comment: "admin, manager"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["farm_id"], name: "index_farm_users_on_farm_id"
+    t.index ["user_id"], name: "index_farm_users_on_user_id"
+  end
+
+  create_table "farms", force: :cascade do |t|
+    t.string "name"
+    t.string "description"
+    t.string "country"
+    t.string "location"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "users", force: :cascade do |t|
     t.string "name"
@@ -20,9 +39,11 @@ ActiveRecord::Schema[7.0].define(version: 2023_11_23_084004) do
     t.string "email"
     t.string "password_digest"
     t.string "password_confirmation"
-    t.string "role", comment: "super-admin, farm-admin, farm-manager"
+    t.string "role", comment: "super_admin, farm_user"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
+  add_foreign_key "farm_users", "farms"
+  add_foreign_key "farm_users", "users"
 end
