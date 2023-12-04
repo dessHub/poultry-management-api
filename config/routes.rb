@@ -5,6 +5,7 @@ Rails.application.routes.draw do
       post '/authenticate', to: 'authentication#authenticate'
       resources :farms
       resources :farming_methods
+      resources :chicken_types
     end
   end
   
