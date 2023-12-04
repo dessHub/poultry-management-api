@@ -3,6 +3,7 @@ class Farm < ApplicationRecord
 
     has_many :farm_users
     has_many :users, :through => :farm_users
+    has_many :flocks
 
     after_save :create_farm_user
 
