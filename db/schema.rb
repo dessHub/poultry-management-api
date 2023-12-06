@@ -53,11 +53,13 @@ ActiveRecord::Schema[7.0].define(version: 2023_12_04_215819) do
     t.string "breed"
     t.integer "quantity"
     t.text "notes"
+    t.bigint "farm_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "farming_method_id"
     t.bigint "chicken_type_id"
     t.index ["chicken_type_id"], name: "index_flocks_on_chicken_type_id"
+    t.index ["farm_id"], name: "index_flocks_on_farm_id"
     t.index ["farming_method_id"], name: "index_flocks_on_farming_method_id"
   end
 
@@ -76,4 +78,5 @@ ActiveRecord::Schema[7.0].define(version: 2023_12_04_215819) do
   add_foreign_key "farm_users", "users"
   add_foreign_key "flocks", "chicken_types"
   add_foreign_key "flocks", "farming_methods"
+  add_foreign_key "flocks", "farms"
 end

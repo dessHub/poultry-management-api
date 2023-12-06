@@ -24,4 +24,10 @@ class User < ApplicationRecord
         return false if farm_user.nil?
         return farm_user.role == 'admin'
     end
+
+    def is_farm_user?(farm)
+        farm_user = self.farm_users.find_by(farm: farm)
+        return false if farm_user.nil?
+        return true
+    end
 end

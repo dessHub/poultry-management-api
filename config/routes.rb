@@ -6,6 +6,7 @@ Rails.application.routes.draw do
       resources :farms
       resources :farming_methods
       resources :chicken_types
+      resources :flocks
     end
   end
   

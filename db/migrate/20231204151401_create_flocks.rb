@@ -6,6 +6,7 @@ class CreateFlocks < ActiveRecord::Migration[7.0]
       t.string :breed
       t.integer :quantity
       t.text :notes
+      t.references :farm, foreign_key: true
 
       t.timestamps
     end
