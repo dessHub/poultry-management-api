@@ -2,7 +2,6 @@ class Api::V1::GrowthsController < ::Api::BaseController
     before_action :authenticate_request, only: [:create, :update, :destroy]
 
     def index
-        logger.info ">>>> #{params[:flock_id]}"
         growths = Growth.where(flock_id: params[:flock_id])
         render json: growths, include: {flock: {}}
     end

@@ -8,6 +8,7 @@ Rails.application.routes.draw do
       resources :chicken_types
       resources :flocks, shallow: true do
         resources :growths
+        resources :mortalities
       end
     end
   end
