@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_12_04_215819) do
+ActiveRecord::Schema[7.0].define(version: 2023_12_06_180707) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -63,6 +63,27 @@ ActiveRecord::Schema[7.0].define(version: 2023_12_04_215819) do
     t.index ["farming_method_id"], name: "index_flocks_on_farming_method_id"
   end
 
+  create_table "growths", force: :cascade do |t|
+    t.integer "age"
+    t.integer "weight", comment: "Weight in grams"
+    t.text "notes"
+    t.bigint "flock_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["flock_id"], name: "index_growths_on_flock_id"
+  end
+
+  create_table "mortalities", force: :cascade do |t|
+    t.integer "age"
+    t.string "cause_of_death", comment: "disease, fatigue, suffocation, other"
+    t.text "notes"
+    t.integer "quantity"
+    t.bigint "flock_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["flock_id"], name: "index_mortalities_on_flock_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "name"
     t.string "phone"
@@ -79,4 +100,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_12_04_215819) do
   add_foreign_key "flocks", "chicken_types"
   add_foreign_key "flocks", "farming_methods"
   add_foreign_key "flocks", "farms"
+  add_foreign_key "growths", "flocks"
+  add_foreign_key "mortalities", "flocks"
 end

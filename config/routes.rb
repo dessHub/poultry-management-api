@@ -6,7 +6,9 @@ Rails.application.routes.draw do
       resources :farms
       resources :farming_methods
       resources :chicken_types
-      resources :flocks
+      resources :flocks, shallow: true do
+        resources :growths
+      end
     end
   end
   
