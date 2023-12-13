@@ -14,7 +14,7 @@ class User < ApplicationRecord
     
 
     def generate_role
-        if role?
+        if role.nil?
             self.role = 'farm_user'
         end
     end
