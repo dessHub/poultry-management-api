@@ -1,6 +1,6 @@
 # poultry-management-api
 
-API collections [documentation](https://api.postman.com/collections/29824984-6e19d0c6-7145-4e91-b178-53b7de2aca52?access_key=PMAT-01HM9WCEHN9XKE3RTEH8HN1PC5)
+API collections [documentation](https://documenter.getpostman.com/view/3652853/2s9YsQ8qDs)
 
 ## Step by Step - Install & Configuration
 
@@ -136,19 +136,19 @@ Then browse to [http://localhost:3001](http://localhost:3001) to view the app in
 
 **7. How to contribute**
 
-###1. Branch off `develop` branch
+### 1. Branch off `develop` branch
 
-###2. Create a descriptive branch depending on the issue
+### 2. Create a descriptive branch depending on the issue
 
       - Feature: `ft-[descriptive-name]` e.g `ft-login`
       - Bug: `bg-[descriptive-name]` e.g `bg-username-validation`
       - Chore: `ch-[descriptive]`. Chore is for the tasks that aren't features or bugs, like setting up deployment configurations.
 
-###3. Open a PR to `develop` branch.
+### 3. Open a PR to `develop` branch.
 
-###4. Wait for approval before merging the PR.
+### 4. Wait for approval before merging the PR.
 
-###5. Always make sure you are branching off upto date `develop` branch by pulling remote `develop`.
+### 5. Always make sure you are branching off upto date `develop` branch by pulling remote `develop`.
 
 ```
 git pull origin develop
