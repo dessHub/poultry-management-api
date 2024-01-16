@@ -136,19 +136,19 @@ Then browse to [http://localhost:3001](http://localhost:3001) to view the app in
 
 **7. How to contribute**
 
-### 1. Branch off `develop` branch
+a. Branch off `develop` branch
 
-### 2. Create a descriptive branch depending on the issue
+b. Create a descriptive branch depending on the issue
 
       - Feature: `ft-[descriptive-name]` e.g `ft-login`
       - Bug: `bg-[descriptive-name]` e.g `bg-username-validation`
       - Chore: `ch-[descriptive]`. Chore is for the tasks that aren't features or bugs, like setting up deployment configurations.
 
-### 3. Open a PR to `develop` branch.
+c. Open a PR to `develop` branch.
 
-### 4. Wait for approval before merging the PR.
+d. Wait for approval before merging the PR.
 
-### 5. Always make sure you are branching off upto date `develop` branch by pulling remote `develop`.
+e. Always make sure you are branching off upto date `develop` branch by pulling remote `develop`.
 
 ```
 git pull origin develop
