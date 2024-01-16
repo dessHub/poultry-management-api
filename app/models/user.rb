@@ -14,7 +14,7 @@ class User < ApplicationRecord
     
 
     def generate_role
-        if role?
+        if role.nil?
             self.role = 'farm_user'
         end
     end
@@ -23,5 +23,11 @@ class User < ApplicationRecord
         farm_user = self.farm_users.find_by(farm: farm)
         return false if farm_user.nil?
         return farm_user.role == 'admin'
+    end
+
+    def is_farm_user?(farm)
+        farm_user = self.farm_users.find_by(farm: farm)
+        return false if farm_user.nil?
+        return true
     end
 end
